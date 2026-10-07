@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kush Goswami | Portfolio</title>
+  <meta name="description" content="Portfolio of Kush Goswami, B.Tech CSE student at Indus University.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== TOP BAR (navigation) ===== -->
+  <header class="topbar">
+    <a href="#home" class="brand">kush@portfolio:~$</a>
+    <nav aria-label="Main">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#activity">activity</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button id="themeBtn" class="btn small" aria-label="Switch dark or light theme">light mode</button>
+  </header>
+
+  <main>
+    <!-- ===== HERO: terminal + ASCII avatar ===== -->
+    <section id="home" class="hero">
+      <div class="window term">
+        <div class="window-bar"><span class="dots"><i></i><i></i><i></i></span> bash: kush</div>
+        <div id="termOut" class="term-out" aria-live="polite"></div>
+        <label class="prompt-row" for="termIn">
+          <span class="prompt">visitor@kush:~$</span>
+          <input id="termIn" type="text" autocomplete="off" spellcheck="false" placeholder="type help and press Enter">
+        </label>
+      </div>
+
+      <div class="window avatar-win">
+        <div class="window-bar"><span class="dots"><i></i><i></i><i></i></span> avatar.sh</div>
+        <pre id="ascii" class="ascii" aria-label="ASCII art portrait of Kush Goswami"></pre>
+        <img id="photo" src="assets/photo.jpg" alt="Kush Goswami" hidden>
+        <p></p>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+      <h2 class="cmd">cat about.txt</h2>
+      <div class="window pad">
+        <p>I'm a kid who chased computers for fun, not for code and not for job openings. The code and the career came along later, and they are still not the reason I'm here.</p>
+        <p>I'm in the 3rd year (5th semester) of B.Tech CSE at Indus University, Ahmedabad. I like building things that work end to end, from a chess engine in Java to a bank system in Python.</p>
+        <dl class="facts">
+          <div><dt>college</dt><dd>Indus University, Ahmedabad</dd></div>
+          <div><dt>course</dt><dd>B.Tech CSE, 2024 to 2028</dd></div>
+          <div><dt>cgpa</dt><dd>8.73 / 10</dd></div>
+          <div><dt>languages</dt><dd>English, Hindi, Gujarati</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+      <h2 class="cmd">ls skills/</h2>
+      <div class="skill-grid">
+        <div class="window pad"><h3>python/</h3><ul class="tags"><li>Core Python</li><li>NumPy</li><li>Pandas</li><li>Scikit-learn</li><li>Matplotlib</li></ul></div>
+        <div class="window pad"><h3>java/</h3><ul class="tags"><li>Core Java</li><li>OOP</li><li>Swing</li><li>AWT</li><li>JavaFX</li></ul></div>
+        <div class="window pad"><h3>databases/</h3><ul class="tags"><li>SQL</li><li>MySQL queries</li></ul></div>
+        <div class="window pad"><h3>tools/</h3><ul class="tags"><li>GitHub</li><li>VS Code</li><li>IntelliJ IDEA</li><li>PyCharm</li></ul></div>
+        <div class="window pad wide"><h3>soft-skills/</h3><ul class="tags"><li>Quick learner</li><li>Team player</li><li>Problem solving</li><li>Adaptability</li></ul></div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS (shown like git commits) ===== -->
+    <section id="projects">
+      <h2 class="cmd">git log --projects</h2>
+      <article class="window pad project">
+        <h3>Multiplayer Chess <span class="stack">Java · Swing · AWT</span></h3>
+        <p>A complete 2-player desktop chess game built from scratch, including castling, en passant and pawn promotion. The code is split into Board, Pieces and Game State classes to keep it modular.</p>
+        <a class="btn" href="https://github.com/Kush-Goswami/Chess_Java" target="_blank" rel="noopener">view on github</a>
+      </article>
+      <article class="window pad project">
+        <h3>Bank Management System <span class="stack">Python</span></h3>
+        <p>A Python application that handles everyday banking tasks such as creating accounts, deposits, withdrawals and balance checks.</p>
+        <a class="btn" href="https://github.com/Kush-Goswami/Bank_Management_System" target="_blank" rel="noopener">view on github</a>
+      </article>
+    </section>
+
+    <!-- ===== HACKATHONS / ACTIVITY ===== -->
+    <section id="activity">
+      <h2 class="cmd">cat timeline.log</h2>
+      <ol class="timeline">
+        <li><b>2026</b> Odoo X Indus University Hackathon. Built an Inventory Management System website with a team.</li>
+        <li><b>2025</b> GDG DevFest Gandhinagar. Attended talks on cloud, AI and open source.</li>
+        <li><b>2024</b> Smart India Hackathon (national level). Built an automated student attendance and analytics system.</li>
+      </ol>
+    </section>
+
+    <!-- ===== CONTACT: form saves to browser database ===== -->
+    <section id="contact">
+      <h2 class="cmd">./contact.sh</h2>
+      <div class="contact-grid">
+        <div class="window pad">
+          <p>Say hello, ask about a project, or just talk computers.</p>
+          <p class="links">
+            <a href="mailto:goswamikush222@gmail.com">goswamikush222@gmail.com</a><br>
+            <a href="tel:+919773269057">+91 97732 69057</a><br>
+            <a href="https://github.com/Kush-Goswami" target="_blank" rel="noopener">github.com/Kush-Goswami</a><br>
+            <a href="https://www.linkedin.com/in/kushgoswami/" target="_blank" rel="noopener">linkedin.com/in/kushgoswami</a>
+          </p>
+          <a class="btn primary" href="assets/Kush_Goswami_Resume.pdf" download>download resume (PDF)</a>
+        </div>
+
+        <form id="contactForm" class="window pad" novalidate>
+          <label>name<input name="name" type="text" required maxlength="60"></label>
+          <label>email<input name="email" type="email" required maxlength="80"></label>
+          <label>message<textarea name="message" rows="4" required maxlength="500"></textarea></label>
+          <button class="btn primary" type="submit">send message</button>
+          <p id="formStatus" class="status" role="status"></p>
+        </form>
+      </div>
+
+      <!-- Shows what is stored in the database so the faculty can see it working -->
+      <div class="window pad db">
+        <div class="db-head">
+          <h3>messages table <span id="dbCount" class="stack"></span></h3>
+          <button id="dbClear" class="btn small" type="button">delete all</button>
+        </div>
+        <ul id="dbList" class="db-list"></ul>
+        <p class="hint">Stored in this browser using localStorage.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>built by hand with HTML, CSS and JavaScript. No frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

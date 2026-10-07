@@ -1,0 +1,194 @@
+/* ===== 1. THEME COLOURS (CSS variables) =====
+   Dark is the default. The light theme overrides the same names. */
+:root {
+  --bg: #07090d;
+  --panel: #0d1219;
+  --line: #1f2a37;
+  --text: #c9d4e0;
+  --muted: #6b7a8c;
+  --green: #39ff88;
+  --cyan: #22d3ee;
+  --pink: #ff3ea5;
+  --glow: 0 0 12px rgba(57, 255, 136, .45);
+  --font: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+:root[data-theme="light"] {
+  --bg: #f1f5f2;
+  --panel: #ffffff;
+  --line: #c9d6cf;
+  --text: #1b2733;
+  --muted: #5c6b79;
+  --green: #0a8f4f;
+  --cyan: #0a7c98;
+  --pink: #c2185b;
+  --glow: none;
+}
+
+/* ===== 2. BASE ===== */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.7 var(--font);
+  /* faint grid background gives the "blueprint" feel */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+body::before { /* fades the grid out so text stays readable */
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(circle at 30% 20%, transparent 0%, var(--bg) 75%);
+}
+a { color: var(--cyan); }
+a:hover { color: var(--green); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+h2, h3 { margin: 0; }
+section { max-width: 1080px; margin: 0 auto; padding: 72px 20px 0; }
+
+/* ===== 3. TOP BAR ===== */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 20px;
+  padding: 12px 20px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { color: var(--green); font-weight: 700; text-decoration: none; text-shadow: var(--glow); }
+.topbar nav { margin-left: auto; display: flex; gap: 18px; }
+.topbar nav a { color: var(--text); text-decoration: none; }
+.topbar nav a:hover { color: var(--green); }
+
+/* ===== 4. "WINDOW" BOX used for every block ===== */
+.window {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.window.pad { padding: 22px; }
+.window-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted); font-size: 13px;
+}
+.dots { display: inline-flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--pink); }
+.dots i:nth-child(2) { background: #ffd24a; }
+.dots i:nth-child(3) { background: var(--green); }
+
+/* Section heading written like a command */
+.cmd { font-size: 20px; margin-bottom: 18px; color: var(--green); text-shadow: var(--glow); }
+.cmd::before { content: "$ "; color: var(--muted); text-shadow: none; }
+
+/* ===== 5. HERO ===== */
+.hero {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px;
+  padding-top: 40px;
+}
+.term-out { padding: 16px; min-height: 320px; white-space: pre-wrap; word-break: break-word; }
+.term-out .cmdline { color: var(--green); }
+.term-out .big { display: block; font-size: 30px; font-weight: 700; line-height: 1.2; color: #fff; text-shadow: var(--glow); }
+:root[data-theme="light"] .term-out .big { color: var(--text); }
+.term-out .dim { color: var(--muted); }
+.term-out .pk { color: var(--pink); }
+.cursor::after { content: "▍"; color: var(--green); animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.prompt-row { display: flex; gap: 10px; padding: 10px 16px; border-top: 1px solid var(--line); }
+.prompt { color: var(--green); white-space: nowrap; }
+.prompt-row input {
+  flex: 1; min-width: 0; background: transparent; border: 0;
+  color: var(--text); font: inherit; outline: none;
+}
+.prompt-row:focus-within { box-shadow: inset 0 0 0 1px var(--green); }
+
+.avatar-win { position: relative; }
+.avatar-win img {
+  display: block; width: 100%; max-height: 420px; object-fit: cover; object-position: top;
+  filter: grayscale(1) contrast(1.15) brightness(.9) sepia(1) hue-rotate(85deg) saturate(3);
+}
+.avatar-win::after { /* scan lines over the avatar */
+  content: ""; position: absolute; inset: 33px 0 0 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+}
+.hint { margin: 0; padding: 8px 14px 12px; color: var(--muted); font-size: 12px; text-align: center; }
+.window.pad .hint, .db .hint { padding: 12px 0 0; text-align: left; }
+
+/* ===== 6. ABOUT / SKILLS / PROJECTS / TIMELINE ===== */
+#about p { margin: 0 0 14px; max-width: 70ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 22px 0 0; }
+.facts div { border-left: 2px solid var(--green); padding-left: 12px; }
+.facts dt { color: var(--muted); font-size: 12px; }
+.facts dd { margin: 0; }
+
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.skill-grid .wide { grid-column: 1 / -1; }
+.skill-grid h3, .project h3 { color: var(--cyan); font-size: 16px; margin-bottom: 12px; }
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li { border: 1px solid var(--line); border-radius: 4px; padding: 2px 10px; font-size: 13px; }
+.tags li:hover { border-color: var(--green); color: var(--green); }
+
+.project { margin-bottom: 16px; border-left: 3px solid var(--pink); }
+.project p { margin: 0 0 16px; max-width: 70ch; }
+.stack { color: var(--muted); font-size: 12px; font-weight: 400; margin-left: 10px; }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 18px; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 22px 22px; max-width: 70ch; }
+.timeline li::before {
+  content: ""; position: absolute; left: -26px; top: 9px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: var(--glow);
+}
+.timeline b { color: var(--pink); margin-right: 10px; }
+
+/* ===== 7. BUTTONS AND FORM ===== */
+.btn {
+  display: inline-block; cursor: pointer;
+  background: transparent; color: var(--text);
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 8px 16px; font: inherit; text-decoration: none;
+}
+.btn:hover { border-color: var(--green); color: var(--green); }
+.btn.primary { background: var(--green); border-color: var(--green); color: #04110a; font-weight: 700; }
+.btn.primary:hover { color: #04110a; box-shadow: var(--glow); }
+.btn.small { padding: 3px 12px; font-size: 13px; }
+.topbar .btn { margin-left: 0; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.contact-grid p { margin-top: 0; }
+.links { line-height: 2; margin-bottom: 20px; }
+form label { display: block; margin-bottom: 14px; color: var(--muted); font-size: 13px; }
+form input, form textarea {
+  display: block; width: 100%; margin-top: 4px; padding: 9px 12px;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--line); border-radius: 6px; font: inherit; resize: vertical;
+}
+form input:focus, form textarea:focus { border-color: var(--green); outline: none; }
+.status { min-height: 1.5em; margin: 12px 0 0; font-size: 13px; }
+.status.ok { color: var(--green); }
+.status.err { color: var(--pink); }
+
+.db-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.db-head h3 { color: var(--cyan); font-size: 16px; }
+.db-list { list-style: none; margin: 0; padding: 0; }
+.db-list li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.db-list .meta { color: var(--muted); font-size: 12px; }
+.db-list .empty { color: var(--muted); display: block; }
+
+footer { max-width: 1080px; margin: 0 auto; padding: 60px 20px 40px; color: var(--muted); font-size: 13px; }
+
+/* ===== 8. RESPONSIVE + ACCESSIBILITY ===== */
+@media (max-width: 860px) {
+  .hero, .contact-grid { grid-template-columns: 1fr; }
+  .topbar nav { display: none; }
+  .topbar .btn { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor::after { animation: none; }
+}
